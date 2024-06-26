@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>text</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<h1>这是测试的html!</h1>
+<p>文件大小：{{ file_size|filesizeformat }}</p>
+<p>切片：{{ name_list|slice:"1:-1" }}</p>
+<p>切片：{{ name_dict.name3|slice:"1:-1" }}</p>
+
+<p>时间格式化：{{ now|date:"Y-m-d H:i:s" }}</p>
+
+<p>a标签：{{ a_html|safe }}</p>
+<p>script标签：</p>
+{{ script_html }}
+<p>大段的文本：{{ p_str|truncatechars:20 }}</p>
+
+<p>自定义的filter方法</p>
+{% load myfilter %}
+{{ name|sb }}
+{{ name_list.0|sb }}
+
+{{ name|addStr:"口活好~" }}
+{{ name|addStr:"腿毛多~" }}
+
+<hr>
+
+<p>for循环</p>
+<ul>
+    {% for name in name_list %}
+        {% if forloop.last %}
+            <li class="dsb">{{ forloop.revcounter }}-{{ name }}</li>
+        {% else %}
+            <li class="{% if forloop.first %}'sb'{% endif %}">{{ forloop.revcounter }}-{{ name }}</li>
+        {% endif %}
+    {% endfor %}
+</ul>
+
+<hr>
+<p>双层循环</p>
+{% for name in name_list2 %}
+    {% for name1 in name %}
+        {{ forloop.parentloop.counter }}
+        {{ forloop.counter }}
+        {{ name1 }}
+    {% endfor %}
+{% endfor %}
+
+<hr>
+
+<p>if elif else</p>
+{% if p3 %}
+    <p>p3:{{ p3 }}</p>
+{% elif p2 %}
+    <p>p2:{{ p2 }}</p>
+{% else %}
+    <p>什么人都没有！</p>
+{% endif %}
+
+<hr>
+
+{% if name_list|length >= 3 %}
+    <p>需要打两辆车</p>
+{% else %}
+    <p>一辆足矣！</p>
+{% endif %}
+
+<hr>
+
+<p>with语句</p>
+{{ name_list2.1.1 }}
+
+{% with name=name_list2.1.1 %}
+    {{ name }}
+{% endwith %}
+<hr>
+
+{# 注释的内容 #}
+
+{{ name }}- {{ name|length }}
+{{ age }}
+
+{{ bucunzai|default:"这个变量并没有传值，使用的是默认值" }}
+<hr>
+{{ name_list }}
+{{ name_list.0 }}
+{{ name_list.1 }}
+{{ name_list.2 }}
+
+<hr>
+
+<ol>
+    {% for name in name_list %}
+    <li>{{ name }}</li>
+    {% endfor %}
+
+</ol>
+
+<hr>
+
+{{ name_dict }}
+{{ name_dict.name1 }}
+
+{% for name in name_list %}
+    {{ name }}
+
+{% endfor %}
+
+<hr>
+{{ p1 }}
+{{ p1.name }}
+{{ p1.age }}
+{{ p1.run }}
+<hr>
+{{ p2 }}
+{{ p2.name }}
+{{ p2.age }}
+{{ p2.run }}
+
+
+</body>
+</html>

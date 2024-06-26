@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://v3.bootcss.com/examples/dashboard/ -->
+<html lang="zh-CN">
+<head>
+    <link rel="icon" href="/static/img/hmbb.png">
+    <title>编辑作者</title>
+</head>
+
+<body>
+
+<h1>编辑作者</h1>
+
+<form action="/edit_author/" method="post">
+    <input type="text" name="author_id" value="{{ author.id }}" style="display: none">
+    <p>
+       作者姓名:<input type="text" name="author_name" value="{{ author.name }}">
+    </p>
+
+    <p>
+        作品:
+        <select multiple name="books">
+            {% for book in book_list %}
+{#                如果当前这本书 在 当前作者关联的所有书 里面 #}
+                {% if book in author.book.all %}
+                    <option selected value="{{ book.id }}">{{ book.title }}</option>
+                {% else %}
+                <option  value="{{ book.id }}">{{ book.title }}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+    </p>
+
+    <p>
+        <input type="submit" value="提交">
+    </p>
+
+</form>
+
+</body>
+</html>

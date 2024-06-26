@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表页</title>
+</head>
+<body>
+
+<a href="/add_user/">添加用户</a>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>id值</th>
+        <th>用户名</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {% for user in user_list %}
+        <tr>
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        </tr>
+    {% endfor %}
+
+    </tbody>
+</table>
+</body>
+</html>
